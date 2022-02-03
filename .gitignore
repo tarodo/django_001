@@ -1,0 +1,11 @@
+env/
+.vscode/
+
+.idea
+*.xlsx
+.replit
+index.html
+
+.env
+__pycache__/
+*.sqlite3
