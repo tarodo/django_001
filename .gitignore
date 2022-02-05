@@ -9,3 +9,6 @@ index.html
 .env
 __pycache__/
 *.sqlite3
+
+*.png
+*.jpg
