@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.http import JsonResponse
 
+from places.models import Place
+
 
 def get_place_detail(request, place_id):
     place = {
@@ -44,34 +46,25 @@ def get_place_detail(request, place_id):
 
 
 def show_homepage(request):
+    all_points = Place.objects.all()
+    features = []
+    for point in all_points:
+        features.append({
+                "type": "Feature",
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [point.lng, point.lat]
+                },
+                "properties": {
+                    "title": point.title,
+                    "placeId": point.id,
+                    "detailsUrl": f"/places/{point.id}"
+                }
+            })
+
     map_points = {
         "type": "FeatureCollection",
-        "features": [
-            {
-                "type": "Feature",
-                "geometry": {
-                    "type": "Point",
-                    "coordinates": [37.62, 55.793676]
-                },
-                "properties": {
-                    "title": "«Легенды Москвы",
-                    "placeId": "moscow_legends",
-                    "detailsUrl": "/places/moscow_legends"
-                }
-            },
-            {
-                "type": "Feature",
-                "geometry": {
-                    "type": "Point",
-                    "coordinates": [37.64, 55.753676]
-                },
-                "properties": {
-                    "title": "Крыши24.рф",
-                    "placeId": "roofs24",
-                    "detailsUrl": "/places/roofs24"
-                }
-            }
-        ]
+        "features": features
     }
 
     data = {"map_points": map_points}
