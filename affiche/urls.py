@@ -18,9 +18,10 @@ from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
 
-from affiche.views import show_homepage
-
+from places.views import show_homepage, get_place_detail
 urlpatterns = [
+    path("places/<str:place_id>/", get_place_detail),
     path("admin/", admin.site.urls),
     path("", show_homepage),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
