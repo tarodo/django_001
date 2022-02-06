@@ -133,3 +133,10 @@ MEDIA_URL = "/media/"
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+SECURE_HSTS_SECONDS = env.int("SECURE_HSTS_SECONDS", 31536000)
+SECURE_HSTS_INCLUDE_SUBDOMAINS = env.bool("SECURE_HSTS_INCLUDE_SUBDOMAINS", False)
+SECURE_SSL_REDIRECT = env.bool("SECURE_SSL_REDIRECT", False)
+SESSION_COOKIE_SECURE = env.bool("SESSION_COOKIE_SECURE", False)
+CSRF_COOKIE_SECURE = env.bool("CSRF_COOKIE_SECURE", False)
+SECURE_HSTS_PRELOAD = env.bool("SECURE_HSTS_PRELOAD", False)
