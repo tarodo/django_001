@@ -30,5 +30,25 @@ python .\manage.py shell
 - Создайте файл базы данных и сразу примените все миграции командой `python3 manage.py migrate`
 - Запустите сервер командой `python3 manage.py runserver`  
 
+## Загрузка данных
+Реализована возможность загрузки данных с помощью json файла.
+```
+python manage.py load_place -j place.json
+```
+`place.json` - любой локальный или сетевой файл вида:
+```
+{
+	title: string,
+	imgs: [
+		link,
+	],
+	description_short: text
+	description_long: html,
+	coordinates: {
+		lng: float,
+		lat: float
+	}
+}
+```
 ## Пример реализации
 [pythonanywhere](https://tarodo.pythonanywhere.com/)
