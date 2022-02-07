@@ -30,7 +30,9 @@ SECRET_KEY = env.str("SECRET_KEY", "REPLACE_ME")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env.bool("DEBUG", True)
 
-ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", [".localhost", "127.0.0.1", "[::1]", ".pythonanywhere.com"])
+ALLOWED_HOSTS = env.list(
+    "ALLOWED_HOSTS", [".localhost", "127.0.0.1", "[::1]", ".pythonanywhere.com"]
+)
 
 # Application definition
 
@@ -42,7 +44,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "adminsortable2",
-    'tinymce',
+    "tinymce",
     "places",
 ]
 
@@ -80,7 +82,9 @@ WSGI_APPLICATION = "affiche.wsgi.application"
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 DATABASES = {
-    "default": dj_database_url.parse(env.str("DATABASE_URL", f"sqlite:///{os.path.join(BASE_DIR, 'db.sqlite3')}")),
+    "default": dj_database_url.parse(
+        env.str("DATABASE_URL", f"sqlite:///{os.path.join(BASE_DIR, 'db.sqlite3')}")
+    ),
 }
 
 # Password validation
@@ -120,7 +124,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
 MEDIA_URL = "/media/"
 
 # Default primary key field type
