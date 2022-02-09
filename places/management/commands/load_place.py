@@ -1,8 +1,5 @@
 import io
-import json
-import logging
 from io import BytesIO
-from pprint import pprint
 
 import requests
 from django.core.files.base import ContentFile
@@ -21,11 +18,13 @@ def load_json(json_url: str):
 
     new_place, _ = Place.objects.get_or_create(
         title=place["title"],
-        description_short=place["description_short"],
-        description_long=place["description_long"],
-        lng=place["coordinates"]["lng"],
-        lat=place["coordinates"]["lat"],
+        defaults={"description_short": place["description_short"],
+                  "description_long": place["description_long"],
+                  "lng": place["coordinates"]["lng"],
+                  "lat": place["coordinates"]["lat"]
+                  }
     )
+    print(new_place.id)
     for idx, img_link in enumerate(place["imgs"]):
         response = requests.get(img_link)
         response.raise_for_status()
