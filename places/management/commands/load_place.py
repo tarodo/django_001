@@ -13,16 +13,11 @@ from places.models import Image as ImageModel
 from places.models import Place
 
 
-def get_json(json_path: str):
-    """Get file from the request"""
-    response = requests.get(json_path)
-    response.raise_for_status()
-    return response.json()
-
-
 def load_json(json_path: str):
     """Check file and load data from it"""
-    place = get_json(json_path)
+    response = requests.get(json_path)
+    response.raise_for_status()
+    place = response.json()
 
     new_place, _ = Place.objects.get_or_create(
         title=place["title"],
