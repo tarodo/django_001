@@ -24,15 +24,14 @@ def load_json(json_url: str):
                   "lat": place["coordinates"]["lat"]
                   }
     )
-    print(new_place.id)
-    for idx, img_link in enumerate(place["imgs"]):
+    for idx, img_link in enumerate(place["imgs"], start=1):
         response = requests.get(img_link)
         response.raise_for_status()
         img = Image.open(BytesIO(response.content))
         buffer = io.BytesIO()
         img.save(buffer, format="JPEG", quality=75)
         cnt_img = ContentFile(buffer.getbuffer())
-        new_img = ImageModel(place=new_place, order=idx + 1)
+        new_img = ImageModel(place=new_place, order=idx)
         new_img.img.save(f"img_{idx}.jpg", cnt_img, save=False)
         new_img.save()
 
