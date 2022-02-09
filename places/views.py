@@ -14,7 +14,9 @@ def get_place_detail(request, place_id):
         "description_long": place.description_long,
         "coordinates": {"lng": place.lng, "lat": place.lat},
     }
-    return JsonResponse(place_front_style)
+    return JsonResponse(
+        place_front_style, json_dumps_params={"indent": 2, "ensure_ascii": False}
+    )
 
 
 def show_homepage(request):
