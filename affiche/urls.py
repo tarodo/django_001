@@ -21,7 +21,7 @@ from django.urls import include, path
 from places.views import get_place_detail, show_homepage
 
 urlpatterns = [
-    path("places/<int:place_id>/", get_place_detail),
+    path("places/<int:place_id>/", get_place_detail, name='place'),
     path("admin/", admin.site.urls),
     path("", show_homepage),
     path("tinymce/", include("tinymce.urls")),

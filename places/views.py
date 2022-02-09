@@ -1,5 +1,6 @@
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, render
+from django.urls import reverse
 
 from places.models import Place
 
@@ -30,7 +31,7 @@ def show_homepage(request):
                 "properties": {
                     "title": point.title,
                     "placeId": point.id,
-                    "detailsUrl": f"/places/{point.id}",
+                    "detailsUrl": reverse("place", args=(point.id, )),
                 },
             }
         )
