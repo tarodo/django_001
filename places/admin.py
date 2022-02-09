@@ -20,5 +20,9 @@ class PlaceAdmin(admin.ModelAdmin):
     ]
 
 
+class ImageAdmin(admin.ModelAdmin):
+    raw_id_fields = ("place",)
+
+
 admin.site.register(Place, PlaceAdmin)
-admin.site.register(Image)
+admin.site.register(Image, ImageAdmin)
