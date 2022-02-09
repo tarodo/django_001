@@ -38,5 +38,5 @@ def show_homepage(request):
 
     map_points = {"type": "FeatureCollection", "features": features}
 
-    data = {"map_points": map_points}
-    return render(request, "homepage.html", context=data)
+    context = {"map_points": map_points}
+    return render(request, "homepage.html", context=context)
