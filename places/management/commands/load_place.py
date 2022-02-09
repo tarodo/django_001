@@ -13,9 +13,9 @@ from places.models import Image as ImageModel
 from places.models import Place
 
 
-def load_json(json_path: str):
+def load_json(json_url: str):
     """Check file and load data from it"""
-    response = requests.get(json_path)
+    response = requests.get(json_url)
     response.raise_for_status()
     place = response.json()
 
