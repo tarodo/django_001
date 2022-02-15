@@ -30,10 +30,8 @@ def load_json(json_url: str):
         img = Image.open(BytesIO(response.content))
         buffer = io.BytesIO()
         img.save(buffer, format="JPEG", quality=75)
-        cnt_img = ContentFile(buffer.getbuffer())
         new_img = ImageModel(place=new_place, order=idx)
-        new_img.img.save(f"img_{idx}.jpg", cnt_img, save=False)
-        new_img.save()
+        new_img.img.save(f"img_{idx}.jpg", ContentFile(buffer.getbuffer()), save=True)
 
 
 class Command(BaseCommand):
