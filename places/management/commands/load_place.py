@@ -1,10 +1,6 @@
-import io
-from io import BytesIO
-
 import requests
 from django.core.files.base import ContentFile
 from django.core.management.base import BaseCommand
-from PIL import Image
 
 from places.models import Image as ImageModel
 from places.models import Place
@@ -18,20 +14,20 @@ def load_json(json_url: str):
 
     new_place, _ = Place.objects.get_or_create(
         title=place["title"],
-        defaults={"description_short": place["description_short"],
-                  "description_long": place["description_long"],
-                  "lng": place["coordinates"]["lng"],
-                  "lat": place["coordinates"]["lat"]
-                  }
+        defaults={
+            "description_short": place["description_short"],
+            "description_long": place["description_long"],
+            "lng": place["coordinates"]["lng"],
+            "lat": place["coordinates"]["lat"],
+        },
     )
     for idx, img_link in enumerate(place["imgs"], start=1):
         response = requests.get(img_link)
         response.raise_for_status()
-        img = Image.open(BytesIO(response.content))
-        buffer = io.BytesIO()
-        img.save(buffer, format="JPEG", quality=75)
-        new_img = ImageModel(place=new_place, order=idx)
-        new_img.img.save(f"img_{idx}.jpg", ContentFile(buffer.getbuffer()), save=True)
+        new_img = ImageModel(
+            place=new_place, order=idx, img=ContentFile(response.content)
+        )
+        new_img.save()
 
 
 class Command(BaseCommand):
