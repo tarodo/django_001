@@ -20,7 +20,7 @@ class Place(models.Model):
 class Image(models.Model):
     img = models.ImageField(verbose_name="Изображение")
     place = models.ForeignKey("Place", on_delete=models.CASCADE, related_name="images", verbose_name="Место")
-    order = models.IntegerField(verbose_name="Порядок")
+    order = models.IntegerField(verbose_name="Порядок", blank=True, null=True)
 
     def __str__(self):
         return f"{self.order} {self.place.title}"
