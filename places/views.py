@@ -8,7 +8,7 @@ from places.models import Place
 def get_place_detail(request, place_id):
     place = get_object_or_404(Place, pk=place_id)
     imgs = [img.img.url for img in place.images.all()]
-    place_front_style = {
+    place = {
         "title": place.title,
         "imgs": imgs,
         "description_short": place.description_short,
@@ -16,7 +16,7 @@ def get_place_detail(request, place_id):
         "coordinates": {"lng": place.lng, "lat": place.lat},
     }
     return JsonResponse(
-        place_front_style, json_dumps_params={"indent": 2, "ensure_ascii": False}
+        place, json_dumps_params={"indent": 2, "ensure_ascii": False}
     )
 
 
