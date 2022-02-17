@@ -2,7 +2,7 @@ import requests
 from django.core.files.base import ContentFile
 from django.core.management.base import BaseCommand
 
-from places.models import Image as ImageModel
+from places.models import Image
 from places.models import Place
 
 
@@ -24,7 +24,7 @@ def load_json(json_url: str):
     for idx, img_link in enumerate(place["imgs"], start=1):
         response = requests.get(img_link)
         response.raise_for_status()
-        new_img = ImageModel.objects.create(place=new_place, order=idx)
+        new_img = Image.objects.create(place=new_place, order=idx)
         new_img.img.save(f"img_{idx}.jpg", ContentFile(response.content), save=True)
 
 
